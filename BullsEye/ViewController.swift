@@ -24,13 +24,24 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         value = Int(slider.value)
         startOver()
+        let thumbImageNormal = #imageLiteral(resourceName: "SliderThumb-Normal")
+        slider.setThumbImage(thumbImageNormal, for: .normal)
+        let thumbImageHighlighted = #imageLiteral(resourceName: "SliderThumb-Highlighted")
+        slider.setThumbImage(thumbImageHighlighted, for: .highlighted)
+        let insets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let trackLeftImage = #imageLiteral(resourceName: "SliderTrackLeft")
+        let trackLeftResizable = trackLeftImage.resizableImage(withCapInsets: insets)
+        slider.setMinimumTrackImage(trackLeftResizable, for: .normal)
+        let trackRightImage = #imageLiteral(resourceName: "SliderTrackRight")
+        let trackRightResizable = trackRightImage.resizableImage(withCapInsets: insets)
+        slider.setMaximumTrackImage(trackRightResizable, for: .normal)
     }
     
     @IBAction func showAlert() {
         let difference = abs(target - value)
         let points = 100 - difference
         score += points
-        let message = "The value of the slider is \(value) and the difference is \(difference)"
+        let message = "The value of the slider is \(value)"
         let alert = UIAlertController(title: "Slider value", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "done", style: .default, handler: {
             action in
